@@ -7,11 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
