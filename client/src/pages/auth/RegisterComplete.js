@@ -12,7 +12,34 @@ const RegisterComplete = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // validation
+    if (!email || !password) {
+      toast.error('Email and password is required')
+      return
+    }
 
+    if (password.length < 6) {
+      toast.error('Password is too short')
+      return
+    }
+
+    try {
+      const result = await auth.signInWithEmailLink(email, window.location.href)
+      if (result.user.emailVerified) {
+        // remove user email from local storage
+        window.localStorage.removeItem("emailForRegistration");
+        // get user id token
+        let user = auth.currentUser
+        await user.updatePassword(password);
+        const idTokenResult = await user.getIdTokenResult();
+        // redux store
+        console.log(user, idTokenResult)
+        // redirect 
+        history.push('/')
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   };
 
   const completeRegistrationForm = () => (
@@ -31,7 +58,7 @@ const RegisterComplete = ({ history }) => {
         onChange={e => setPassword(e.target.value)}
         placeholder="password"
       />
-      <br/>
+      <br />
       <button type="submit" className="btn btn-raised">
         Complete Registration
       </button>
