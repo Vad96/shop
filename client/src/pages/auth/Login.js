@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Button } from 'antd';
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -114,6 +115,8 @@ const Login = ({ history }) => {
           >
             Login with google
           </Button>
+          <Link to="/forgot/password" className="float-right text-danger">Forgot password?</Link>
+
         </div>
       </div>
     </div>
