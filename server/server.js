@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 
+// import routes
+const authRoutes = require('./routes/auth')
+
 // app
 const app = express()
 
@@ -22,14 +25,8 @@ app.use(morgan('dev'))
 app.use(bodyParser.json({ limit: '2mb' }))
 app.use(cors());
 
-// route
+// routes middleware
+app.use('/api', authRoutes);
 
-app.get('/api', (req, res) => {
-  res.json({
-    data: 'hello pidor'
-  })
-})
-
-//
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`server is running on port ${port}`));
