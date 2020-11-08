@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 const Register = ({ history }) => {
   const [email, setEmail] = useState("");
 
-  const { user } = useSelector(state => ({ ...state }))
+  const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
-    if (user && user.token) history.push('/')
-  }, [user])
+    if (user && user.token) history.push("/");
+  }, [user, history]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +42,6 @@ const Register = ({ history }) => {
       />
 
       <br />
-
       <button type="submit" className="btn btn-raised">
         Register
       </button>
